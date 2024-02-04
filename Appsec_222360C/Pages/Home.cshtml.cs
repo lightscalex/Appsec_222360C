@@ -34,8 +34,5 @@ namespace Appsec_222360C.Pages
 
             return RedirectToPage("/Login");
         }
-        public void OnGet()
-        {
-        }
     }
 }

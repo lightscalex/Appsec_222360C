@@ -10,6 +10,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddDataProtection();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromSeconds(30);

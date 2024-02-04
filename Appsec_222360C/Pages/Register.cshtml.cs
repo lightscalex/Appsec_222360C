@@ -2,6 +2,7 @@ using Appsec_222360C.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.DataProtection;
 using Appsec_222360C.Model;
 
 namespace Appsec_222360C.Pages
@@ -20,18 +21,24 @@ namespace Appsec_222360C.Pages
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public void OnGet()
-        {
-        }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
+                var dataProtectionProvider = DataProtectionProvider.Create("EncryptData");
+                var protector = dataProtectionProvider.CreateProtector("My Secret Key");
                 var user = new ApplicationUser()
                 {
+                    firstName = RModel.firstName,
+                    lastName = RModel.lastName,
                     UserName = RModel.Email,
-                    Email = RModel.Email
+                    Email = RModel.Email,
+                    gender = RModel.gender,
+                    nric = protector.Protect(RModel.nric),
+                    dateOfBirth = RModel.dateOfBirth,
+                    whoAmI = RModel.whoAmI,
+                    resume = RModel.resume,
                 };
                 var result = await userManager.CreateAsync(user, RModel.Password);
                 if (result.Succeeded)
