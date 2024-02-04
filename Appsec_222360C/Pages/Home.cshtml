@@ -1,0 +1,22 @@
+﻿@page
+@model Appsec_222360C.Pages.HomeModel
+@{
+}
+
+
+
+<div class="text-center">
+
+    @if (Model.currentUser != null)
+    {
+        <h2>User Details</h2>
+        <p>First Name: @Model.currentUser.firstName</p>
+        <p>Last Name: @Model.currentUser.lastName</p>
+        <p>Gender: @Model.currentUser.gender</p>
+        <p>NRIC: @Model.currentUser.nric</p>
+        <p>Date of Birth: @Model.currentUser.dateOfBirth</p>
+        <p>Resume: @Model.currentUser.resume</p>
+        <p>Who Am I: @Model.currentUser.whoAmI</p>
+    }
+</div>
+S
